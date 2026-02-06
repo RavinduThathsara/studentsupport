@@ -1,4 +1,4 @@
-package com.yourapp.entity.enums;
+package com.studentsupport.entity.enums;
 
 public enum Role {
     STUDENT,

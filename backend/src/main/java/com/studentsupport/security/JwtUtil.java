@@ -1,4 +1,4 @@
-package com.yourapp.security;
+package com.studentsupport.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

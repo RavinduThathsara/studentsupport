@@ -1,10 +1,10 @@
-package com.yourapp.service;
+package com.studentsupport.service;
 
-import com.yourapp.dto.auth.*;
-import com.yourapp.entity.User;
-import com.yourapp.entity.enums.Role;
-import com.yourapp.repository.UserRepository;
-import com.yourapp.security.JwtUtil;
+import com.studentsupport.dto.auth.*;
+import com.studentsupport.entity.User;
+import com.studentsupport.entity.enums.Role;
+import com.studentsupport.repository.UserRepository;
+import com.studentsupport.security.JwtUtil;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

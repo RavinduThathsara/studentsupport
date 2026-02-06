@@ -1,6 +1,6 @@
-package com.yourapp.repository;
+package com.studentsupport.repository;
 
-import com.yourapp.entity.User;
+import com.studentsupport.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

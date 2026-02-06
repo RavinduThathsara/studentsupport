@@ -1,4 +1,4 @@
-package com.yourapp.security;
+package com.studentsupport.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

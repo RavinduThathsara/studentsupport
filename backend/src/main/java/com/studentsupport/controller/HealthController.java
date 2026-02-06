@@ -1,4 +1,4 @@
-package com.yourapp.controller;
+package com.studentsupport.controller;
 
 import org.springframework.web.bind.annotation.*;
 

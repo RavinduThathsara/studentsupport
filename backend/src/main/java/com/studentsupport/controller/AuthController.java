@@ -1,7 +1,7 @@
-package com.yourapp.controller;
+package com.studentsupport.controller;
 
-import com.yourapp.dto.auth.*;
-import com.yourapp.service.AuthService;
+import com.studentsupport.dto.auth.*;
+import com.studentsupport.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

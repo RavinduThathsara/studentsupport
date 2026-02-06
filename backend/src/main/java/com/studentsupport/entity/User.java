@@ -1,6 +1,6 @@
-package com.yourapp.entity;
+package com.studentsupport.entity;
 
-import com.yourapp.entity.enums.Role;
+import com.studentsupport.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

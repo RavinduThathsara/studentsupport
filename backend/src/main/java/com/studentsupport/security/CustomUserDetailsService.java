@@ -1,7 +1,7 @@
-package com.yourapp.security;
+package com.studentsupport.security;
 
-import com.yourapp.entity.User;
-import com.yourapp.repository.UserRepository;
+import com.studentsupport.entity.User;
+import com.studentsupport.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
