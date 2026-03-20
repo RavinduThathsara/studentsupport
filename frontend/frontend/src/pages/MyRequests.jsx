@@ -8,10 +8,10 @@ export default function MyRequests() {
 
   useEffect(() => {
     const load = async () => {
-      const res = await api.get("/api/requests");
+      const res = await api.get("/requests");
       setData(res.data.filter(r => r.requesterId === meId));
     };
-    load();
+    void load();
   }, [meId]);
 
   return (

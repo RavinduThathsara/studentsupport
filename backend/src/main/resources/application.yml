@@ -1,15 +1,24 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/student_support?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: NewStrongPassword123!
+    url: jdbc:mysql://127.0.0.1:3306/student_support?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    # Use environment variables if you have a different MySQL username/password.
+    # Example (Windows PowerShell):
+    #   $env:DB_USER="root"; $env:DB_PASSWORD="yourPassword"
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:NewStrongPassword123!}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    # Hibernate 6 can fail dialect detection when JDBC metadata isn't available yet.
+    # Setting it explicitly prevents startup from crashing.
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      # Don't run schema migrations automatically on startup.
+      # This prevents the app from crashing when MySQL credentials/DB are not ready yet.
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:

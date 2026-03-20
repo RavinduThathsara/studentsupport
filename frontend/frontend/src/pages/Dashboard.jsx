@@ -9,13 +9,13 @@ export default function Dashboard() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await api.get("/api/requests");
+        const res = await api.get("/requests");
         setData(res.data);
-      } catch (e) {
+      } catch {
         setErr("Failed to load requests (Are you logged in?)");
       }
     };
-    load();
+    void load();
   }, []);
 
   return (

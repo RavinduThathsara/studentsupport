@@ -13,7 +13,7 @@ export default function CreateRequest() {
     e.preventDefault();
     setErr("");
     try {
-      const res = await api.post("/api/requests", { title, category, description });
+      const res = await api.post("/requests", { title, category, description });
       nav(`/requests/${res.data.id}`);
     } catch (e2) {
       setErr(e2?.response?.data?.error || "Create failed");

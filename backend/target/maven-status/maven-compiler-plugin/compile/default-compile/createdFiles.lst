@@ -34,6 +34,7 @@ com\studentsupport\security\SecurityConfig.class
 com\studentsupport\repository\RatingRepository.class
 com\studentsupport\repository\SupportRequestRepository.class
 com\studentsupport\dto\request\SupportRequestResponseDTO$SupportRequestResponseDTOBuilder.class
+com\studentsupport\util\SecurityUtil.class
 com\studentsupport\controller\MessageController.class
 com\studentsupport\exception\NotFoundException.class
 com\studentsupport\exception\BadRequestException.class

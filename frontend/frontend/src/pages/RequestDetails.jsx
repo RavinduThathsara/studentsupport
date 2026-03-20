@@ -18,45 +18,82 @@ export default function RequestDetails() {
   const load = async () => {
     setErr("");
     try {
-      const rr = await api.get(`/api/requests/${id}`);
+      const rr = await api.get(`/requests/${id}`);
       setR(rr.data);
 
       // messages only for requester/helper; if forbidden ignore
       try {
-        const mm = await api.get(`/api/requests/${id}/messages`);
+        const mm = await api.get(`/requests/${id}/messages`);
         setMessages(mm.data);
-      } catch {}
-    } catch (e) {
+      } catch {
+        setMessages([]);
+      }
+    } catch {
       setErr("Failed to load request");
     }
   };
 
-  useEffect(() => { load(); }, [id]);
+  useEffect(() => {
+    let active = true;
+
+    const loadDetails = async () => {
+      try {
+        const rr = await api.get(`/requests/${id}`);
+        if (!active) {
+          return;
+        }
+
+        setErr("");
+        setR(rr.data);
+
+        try {
+          const mm = await api.get(`/requests/${id}/messages`);
+          if (active) {
+            setMessages(mm.data);
+          }
+        } catch {
+          if (active) {
+            setMessages([]);
+          }
+        }
+      } catch {
+        if (active) {
+          setErr("Failed to load request");
+        }
+      }
+    };
+
+    void loadDetails();
+
+    return () => {
+      active = false;
+    };
+  }, [id]);
 
   const accept = async () => {
-    await api.post(`/api/requests/${id}/accept`);
-    load();
+    await api.post(`/requests/${id}/accept`);
+    await load();
   };
 
   const changeStatus = async (status) => {
-    await api.post(`/api/requests/${id}/status?status=${status}`);
-    load();
+    await api.post(`/requests/${id}/status?status=${status}`);
+    await load();
   };
 
   const sendMsg = async () => {
     if (!text.trim()) return;
-    await api.post(`/api/requests/${id}/messages`, { text });
+    await api.post(`/requests/${id}/messages`, { text });
     setText("");
-    load();
+    await load();
   };
 
   const rate = async () => {
-    await api.post(`/api/requests/${id}/rating`, { stars, comment });
+    await api.post(`/requests/${id}/rating`, { stars, comment });
     alert("Rated!");
   };
 
   const report = async () => {
-    await api.post(`/api/reports`, { requestId: Number(id), reason: reportReason });
+    await api.post("/reports", { requestId: Number(id), reason: reportReason });
     setReportReason("");
     alert("Reported!");
   };

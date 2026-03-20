@@ -8,18 +8,40 @@ export default function AdminReports() {
   const load = async () => {
     setErr("");
     try {
-      const res = await api.get("/api/admin/reports");
+      const res = await api.get("/admin/reports");
       setData(res.data);
     } catch {
       setErr("Only ADMIN can view reports (or backend not secured yet).");
     }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    let active = true;
+
+    const loadOnMount = async () => {
+      try {
+        const res = await api.get("/admin/reports");
+        if (active) {
+          setErr("");
+          setData(res.data);
+        }
+      } catch {
+        if (active) {
+          setErr("Only ADMIN can view reports (or backend not secured yet).");
+        }
+      }
+    };
+
+    void loadOnMount();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const resolve = async (id) => {
-    await api.post(`/api/admin/reports/${id}/resolve`);
-    load();
+    await api.post(`/admin/reports/${id}/resolve`);
+    await load();
   };
 
   return (

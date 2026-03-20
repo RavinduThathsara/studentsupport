@@ -12,13 +12,23 @@ export default function Login() {
     e.preventDefault();
     setErr("");
     try {
-      const res = await api.post("/api/auth/login", { email, password });
+      const res = await api.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("userId", String(res.data.userId));
       nav("/");
     } catch (e2) {
-      setErr(e2?.response?.data?.error || "Login failed");
+      const msg =
+        e2?.response?.data?.error ||
+        e2?.response?.data?.message ||
+        (Array.isArray(e2?.response?.data?.errors)
+          ? e2.response.data.errors[0]?.msg ||
+            e2.response.data.errors[0]?.defaultMessage ||
+            e2.response.data.errors[0]?.message
+          : null) ||
+        e2?.message ||
+        "Login failed";
+      setErr(msg);
     }
   };
 

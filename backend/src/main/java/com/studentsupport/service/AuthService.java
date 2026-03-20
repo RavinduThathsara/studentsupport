@@ -27,13 +27,15 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest req) {
-        if (users.existsByEmail(req.getEmail())) {
+        String email = req.getEmail().trim().toLowerCase();
+
+        if (users.existsByEmail(email)) {
             throw new IllegalArgumentException("Email already registered");
         }
 
         User user = User.builder()
-                .fullName(req.getFullName())
-                .email(req.getEmail().toLowerCase())
+                .fullName(req.getFullName().trim())
+                .email(email)
                 .passwordHash(encoder.encode(req.getPassword()))
                 .role(Role.STUDENT)
                 .createdAt(Instant.now())
@@ -46,11 +48,13 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest req) {
+        String email = req.getEmail().trim().toLowerCase();
+
         authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getEmail().toLowerCase(), req.getPassword())
+                new UsernamePasswordAuthenticationToken(email, req.getPassword())
         );
 
-        User user = users.findByEmail(req.getEmail().toLowerCase())
+        User user = users.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid login"));
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());

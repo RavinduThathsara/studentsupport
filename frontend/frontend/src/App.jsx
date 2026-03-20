@@ -14,18 +14,71 @@ import AdminReports from "./pages/AdminReports";
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <div className="App">
+        <Navbar />
 
-        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/create" element={<ProtectedRoute><CreateRequest /></ProtectedRoute>} />
-        <Route path="/requests/:id" element={<ProtectedRoute><RequestDetails /></ProtectedRoute>} />
-        <Route path="/my-requests" element={<ProtectedRoute><MyRequests /></ProtectedRoute>} />
-        <Route path="/my-helps" element={<ProtectedRoute><MyHelps /></ProtectedRoute>} />
-        <Route path="/admin/reports" element={<ProtectedRoute><AdminReports /></ProtectedRoute>} />
-      </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoute>
+                <CreateRequest />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/requests/:id"
+            element={
+              <ProtectedRoute>
+                <RequestDetails />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/my-requests"
+            element={
+              <ProtectedRoute>
+                <MyRequests />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/my-helps"
+            element={
+              <ProtectedRoute>
+                <MyHelps />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/reports"
+            element={
+              <ProtectedRoute>
+                <AdminReports />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+
     </BrowserRouter>
+
+
   );
 }
